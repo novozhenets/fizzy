@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   root "splats#index"
 
-  resources :categories, only: %i[index destroy]
   resource :session
 
   resources :splats do
-    resources :categories, only: %i[new create]
+    resources :categories, shallow: true
   end
+
+  resources :categories, only: :index
 
   get "up", to: "rails/health#show", as: :rails_health_check
 end

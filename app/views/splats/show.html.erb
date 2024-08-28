@@ -24,7 +24,23 @@
   <%= render @splat %>
 </div>
 
-<section class="comments align-center panel center borderless margin-block flex flex-wrap gap" style="--splat-color: <%= @splat.color %>;">
-  <%= render partial: "comments/comment", collection: (@splat.comments + @splat.boosts).sort_by { |comment| comment.updated_at } %>
+<section class="comments align-center panel center borderless margin-block flex flex-wrap gap-half" style="--splat-color: <%= @splat.color %>;">
+  <% comments = (@splat.comments + @splat.boosts).sort_by(&:updated_at) %>
+  <% boosts = [] %>
+
+  <% comments.each_with_index do |comment, index| %>
+    <% if comment.is_a?(Boost) %>
+      <% boosts << comment %>
+      <% if comments[index + 1].nil? || !comments[index + 1].is_a?(Boost) %>
+        <% user_boosts = boosts.group_by(&:creator).transform_values(&:count) %>
+        <div class="boost flex-inline align-start gap fill-white border-radius center position-relative">
+          <%= user_boosts.map { |user, count| "#{user.name} +#{count}" }.to_sentence %>
+        </div>
+        <% boosts.clear %>
+      <% end %>
+    <% else %>
+      <%= render partial: "comments/comment", object: comment %>
+    <% end %>
+  <% end %>
   <%= render "comments/new" %>
 </section>

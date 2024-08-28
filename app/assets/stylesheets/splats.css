@@ -61,7 +61,7 @@
   }
 
   .splat__perma & {
-    --splat-size: 50vh !important;
+    --splat-size: 40vh !important;
   }
 }
 

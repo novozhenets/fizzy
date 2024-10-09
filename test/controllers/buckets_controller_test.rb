@@ -2,7 +2,7 @@ require "test_helper"
 
 class BucketsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in :kevin
+    sign_in_as :kevin
   end
 
   test "edit" do

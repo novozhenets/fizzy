@@ -30,7 +30,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "destroy" do
-    sign_in :kevin
+    sign_in_as :kevin
     delete session_url
     assert_redirected_to new_session_url
     assert_not cookies[:session_token].present?

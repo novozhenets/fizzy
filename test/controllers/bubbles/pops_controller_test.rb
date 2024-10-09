@@ -2,7 +2,7 @@ require "test_helper"
 
 class Bubbles::PopsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in :kevin
+    sign_in_as :kevin
   end
 
   test "create" do

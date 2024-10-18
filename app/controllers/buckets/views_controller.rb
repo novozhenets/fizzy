@@ -5,12 +5,12 @@ class Buckets::ViewsController < ApplicationController
 
   def create
     @view = @bucket.views.create! filters: filter_params
-    redirect_to bucket_bubbles_path(@bucket, **filter_params.merge(view_id: @view&.id)), notice: "✓"
+    redirect_to bucket_bubbles_path(@bucket, **filter_params.merge(view_id: @view.id)), notice: "✓"
   end
 
   def update
     @view.update! filters: filter_params
-    redirect_to bucket_bubbles_path(@bucket, **filter_params.merge(view_id: @view&.id)), notice: "✓"
+    redirect_to bucket_bubbles_path(@bucket, **filter_params.merge(view_id: @view.id)), notice: "✓"
   end
 
   def destroy
@@ -24,6 +24,6 @@ class Buckets::ViewsController < ApplicationController
     end
 
     def filter_params
-      helpers.bubble_filter_params.without(:view_id).to_h.compact_blank
+      helpers.bubble_filter_params.to_h.compact_blank
     end
 end

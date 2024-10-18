@@ -6,7 +6,7 @@
   <dialog class="filter__popup panel fill-white shadow" data-dialog-target="dialog">
     <menu class="filter__menu unpad margin-none">
       <% Current.user.buckets.order(:name).each do |bucket| %>
-        <li><%= link_to bucket.name, bucket_bubbles_path(bucket, bubble_filter_params), class: "filter__button" %></li>
+        <li><%= link_to bucket.name, bucket_bubbles_path(bucket, view_filter_params), class: "filter__button" %></li>
       <% end %>
     </menu>
   </dialog>

@@ -24,7 +24,7 @@
 
   <small class="flex align-center gap flex-item-no-shrink">
     <% bubble.tags.each do |tag| %>
-      <%= link_to "##{tag.title}", bucket_bubbles_path(bubble.bucket, bubble_filter_params.merge(tag_ids: tag.id)), style: "color: #{bubble.color}" %>
+      <%= link_to "##{tag.title}", bucket_bubbles_path(bubble.bucket, view_filter_params.merge(tag_ids: tag.id)), style: "color: #{bubble.color}" %>
     <% end %>
 
     <%= tag.time bubble.created_at, class: "txt-nowrap flex-item-justify-end" do %>

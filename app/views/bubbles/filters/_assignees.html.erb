@@ -6,13 +6,13 @@
   <dialog class="filter__popup panel fill-white shadow" data-dialog-target="dialog">
     <menu class="filter__menu unpad margin-none">
       <% bucket.users.active.order(:name).each do |user| %>
-        <li><%= link_to user.name, bucket_bubbles_path(bucket, bubble_filter_params.merge(assignee_ids: [ user.id ])) %></li>
+        <li><%= link_to user.name, bucket_bubbles_path(bucket, view_filter_params.merge(assignee_ids: [ user.id ])) %></li>
       <% end %>
     </menu>
   </dialog>
 
   <% if assignee_filters %>
-    <%= link_to bucket_bubbles_path(bucket, bubble_filter_params.without(:assignee_ids)), class: "btn", style: "font-size: 0.4em;" do %>
+    <%= link_to bucket_bubbles_path(bucket, view_filter_params.without(:assignee_ids)), class: "btn", style: "font-size: 0.4em;" do %>
       <%= image_tag "remove.svg", aria: { hidden: true }, size: 24 %>
       <span class="for-screen-reader">Clear</span>
     <% end %>

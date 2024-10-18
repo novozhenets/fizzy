@@ -30,7 +30,7 @@
   <header class="flex-inline align-center gap txt-small margin-block-end-half center">
     <form class="flex-item-no-shrink">
       <%= search_field_tag :term, params[:term], class: "input center flex-inline", placeholder: "Type to filter…" %>
-      <% bubble_filter_params.without(:term).each do |name, value| %>
+      <% view_filter_params.without(:term).each do |name, value| %>
         <%= hidden_field_tag name, value %>
       <% end %>
     </form>

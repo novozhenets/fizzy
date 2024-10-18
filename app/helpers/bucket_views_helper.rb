@@ -5,7 +5,6 @@ module BucketViewsHelper
 
   def bucket_view_form_tag(path, method:, id:)
     form_tag path, method: method, id: id do
-      concat hidden_field_tag(:view_id, params[:view_id])
       concat hidden_field_tag(:order_by, params[:order_by])
       concat hidden_field_tag(:status, params[:status])
 

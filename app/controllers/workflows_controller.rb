@@ -38,6 +38,6 @@ class WorkflowsController < ApplicationController
     end
 
     def workflow_params
-      params.require(:workflow).permit(:name)
+      params.expect(workflow: [ :name ])
     end
 end

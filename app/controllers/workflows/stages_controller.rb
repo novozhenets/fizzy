@@ -31,6 +31,6 @@ class Workflows::StagesController < ApplicationController
     end
 
     def stage_params
-      params.require(:workflow_stage).permit(:name)
+      params.expect(workflow_stage: [ :name ])
     end
 end

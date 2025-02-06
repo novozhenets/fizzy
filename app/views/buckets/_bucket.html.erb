@@ -11,7 +11,7 @@
 
   <div class="flex align-center justify-center flex-column flex-wrap center gap-half position-relative full-width">
     <%= link_to bubbles_path(bucket_ids: [ bucket ]), class: "txt-ink flex flex-column" do %>
-      <strong class="txt-x-large"><%= bucket.name %></strong>
+      <strong class="txt-large"><%= bucket.name %></strong>
     <% end %>
 
     <%= link_to edit_bucket_path(bucket), class: "btn txt-small bucket__button" do %>

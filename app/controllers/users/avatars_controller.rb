@@ -8,8 +8,6 @@ class Users::AvatarsController < ApplicationController
 
     if @user.avatar.attached?
       send_blob_stream @user.avatar
-    elsif @user.system?
-      render_system_avatar
     else
       render_initials
     end
@@ -23,11 +21,6 @@ class Users::AvatarsController < ApplicationController
   private
     def set_user
       @user = Current.account.users.find(params[:user_id])
-    end
-
-    def render_system_avatar
-      send_file Rails.root.join("app/assets/images/system-avatar.svg"),
-        content_type: "image/svg+xml", disposition: :inline
     end
 
     def render_initials

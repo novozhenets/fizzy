@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root "events#index"
 
+  get :mcp, to: "mcp#manifest"
+
   resource :account do
     scope module: :accounts do
       resource :join_code

@@ -1,5 +1,5 @@
 <%= turbo_frame_tag @comment, :new_reaction do %>
-  <%= form_with url: card_comment_reactions_path(@comment.card, @comment),
+  <%= form_with model: [ @comment.card, @comment, Reaction.new ],
         class: "reaction reaction__form flex-inline postion--relative max-width align-center fill-white gap expanded",
         html: { aria: { label: "New reaction" } },
         data: { controller: "form", turbo_frame: dom_id(@comment, :reacting), action: "keydown.esc->form#cancel" } do |form| %>
@@ -8,7 +8,7 @@
         <%= avatar_tag Current.user %>
       </figure>
 
-      <%= form.text_field :content, name: "reaction[content]", autofocus: true, autocomplete: "off", autocorrect: "off", maxlength: 16,
+      <%= form.text_field :content, autofocus: true, autocomplete: "off", autocorrect: "off", maxlength: 16,
             required: true, pattern: /\S+.*/, class: "input reaction__input txt-small",
             aria: { label: "Add a reaction" } %>
     </label>

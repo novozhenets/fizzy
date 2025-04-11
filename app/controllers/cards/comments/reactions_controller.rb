@@ -17,7 +17,7 @@ class Cards::Comments::ReactionsController < ApplicationController
 
   def destroy
     @reaction = @comment.reactions.find(params[:id])
-    @reaction.destroy!
+    @reaction.destroy
 
     broadcast_remove
   end

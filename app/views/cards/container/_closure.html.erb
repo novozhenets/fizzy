@@ -24,7 +24,7 @@
     <span class="card-perma__closure-message">
       <% if card.doing? %>
         Returns to <em>Considering</em> if no activity <%= local_datetime_tag(card.auto_reconsider_at, style: :indays) -%>.
-      <% else %>
+      <% elsif card.auto_closing? %>
         Auto-closes if no activity <%= local_datetime_tag(card.auto_close_at, style: :indays) -%>.
       <% end %>
     </span>

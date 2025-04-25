@@ -35,7 +35,7 @@ class CollectionsControllerTest < ActionDispatch::IntegrationTest
       user_ids: users(:david, :jz).pluck(:id)
     }
 
-    assert_redirected_to cards_path(collection_ids: [ collections(:writebook) ])
+    assert_redirected_to edit_collection_path(collections(:writebook))
     assert_equal "Writebook bugs", collections(:writebook).reload.name
     assert_equal users(:david, :jz).sort, collections(:writebook).users.sort
     assert_not collections(:writebook).all_access?
@@ -49,7 +49,7 @@ class CollectionsControllerTest < ActionDispatch::IntegrationTest
 
     patch collection_path(collection), params: { collection: { name: "Bugs", all_access: true } }
 
-    assert_redirected_to cards_path(collection_ids: [ collection ])
+    assert_redirected_to edit_collection_path(collection)
     assert collection.reload.all_access?
     assert_equal User.all, collection.users
   end

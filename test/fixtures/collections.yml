@@ -2,4 +2,5 @@ writebook:
   name: Writebook
   creator: david
   all_access: true
+  auto_close_period: 30
   workflow: qa

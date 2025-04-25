@@ -1,0 +1,6 @@
+<strong class="txt-large">Auto-Close Cards</strong>
+<label for="closure" class="margin-block-end">Cards automatically close when there is no activity for…</label>
+
+<%= form_with model: collection, data: { controller: "form" } do |form| %>
+  <%= form.select :auto_close_period, collection_auto_close_options, {}, { class: "input input--select full-width margin-block-end", data: { action: "change->form#submit" } } %>
+<% end %>

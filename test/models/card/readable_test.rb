@@ -20,4 +20,10 @@ class Card::ReadableTest < ActiveSupport::TestCase
       cards(:logo).read_by(users(:david))
     end
   end
+
+  test "read clears notifications from the comments" do
+    assert_changes -> { notifications(:layout_commented_kevin).reload.read? }, from: false, to: true do
+      cards(:layout).read_by(users(:kevin))
+    end
+  end
 end

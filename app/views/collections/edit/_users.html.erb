@@ -1,0 +1,42 @@
+<section class="margin-block fill-shade border-radius">
+  <%= access_menu_tag collection do %>
+    <li class="flex align-center gap pad unpad-block-end txt-normal">
+      <figure class="avatar flex-item-no-shrink" style="--avatar-border-radius: 0; --avatar-size: 3.5ch; margin-inline: 0.3em;">
+        <%= icon_tag "everyone" %>
+        <span class="for-screen-reader">Everyone</span>
+      </figure>
+
+      <div class="min-width">
+        <div class="overflow-ellipsis fill-shade"><strong>Everyone</strong></div>
+      </div>
+
+      <hr class="separator--horizontal flex-item-grow" style="--border-color: var(--color-subtle-dark); --border-style: dashed" aria-hidden="true" />
+
+      <label for="collection_all_access" class="switch">
+        <%= form.check_box :all_access, class: "switch__input", checked: collection.all_access?, data: { action: "change->toggle-class#toggle" } %>
+        <span class="switch__btn round"></span>
+        <span class="for-screen-reader">Give everyone access to this project</span>
+      </label>
+    </li>
+
+    <hr class="separator--horizontal margin-inline" style="--border-color: var(--color-subtle-dark);" aria-hidden="true" />
+
+    <% if User.active.count > 20 %>
+      <div class="pad-inline">
+        <input placeholder="Filter…" class="input input--transparent full-width" type="search" autocorrect="off" autocomplete="off" data-1p-ignore="true" data-action="input->filter#filter">
+      </div>
+    <% end %>
+
+    <div data-filter-target="list" class="users-list pad-inline">
+      <% 20.times do %>
+        <%= access_toggles_for selected_users, selected: true %>
+      <% end %>
+
+      <% if selected_users.any? && unselected_users.any? %>
+        <hr class="separator full-width" style="--border-style: solid">
+      <% end %>
+
+      <%= access_toggles_for unselected_users, selected: false %>
+    </div>
+  <% end %>
+</section>

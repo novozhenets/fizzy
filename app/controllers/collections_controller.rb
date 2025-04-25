@@ -6,7 +6,7 @@ class CollectionsController < ApplicationController
   end
 
   def create
-    @collection = Collection.create! collection_params
+    @collection = Collection.create! collection_params.with_defaults(all_access: true)
     redirect_to cards_path(collection_ids: [ @collection ])
   end
 
@@ -19,7 +19,7 @@ class CollectionsController < ApplicationController
     @collection.update! collection_params
     @collection.accesses.revise granted: grantees, revoked: revokees
 
-    redirect_to cards_path(collection_ids: [ @collection ])
+    redirect_to edit_collection_path(@collection), notice: "Collection updated"
   end
 
   def destroy
@@ -33,7 +33,7 @@ class CollectionsController < ApplicationController
     end
 
     def collection_params
-      params.expect(collection: [ :name, :all_access ]).with_defaults(all_access: true)
+      params.expect(collection: [ :name, :all_access, :auto_close_period ])
     end
 
     def grantees

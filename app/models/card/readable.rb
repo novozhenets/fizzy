@@ -13,7 +13,19 @@ module Card::Readable
     end
 
     def notification_sources
-      events + mentions + comment_mentions
+      event_notification_sources + mention_notification_sources
+    end
+
+    def event_notification_sources
+      events + comment_creation_events
+    end
+
+    def comment_creation_events
+      Event.where(eventable: comments)
+    end
+
+    def mention_notification_sources
+      mentions + comment_mentions
     end
 
     def comment_mentions
@@ -21,6 +33,6 @@ module Card::Readable
     end
 
     def comments
-      Comment.where(id: messages.comments.pluck(:messageable_id))
+      @comments ||= Comment.where(id: messages.comments.pluck(:messageable_id))
     end
 end

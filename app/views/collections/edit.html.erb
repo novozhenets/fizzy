@@ -17,54 +17,9 @@
     <strong class="txt-large">Name and Access</strong>
     <p class="margin-none-block-start">Choose who can access this Collection.</p>
     <%= form_with model: @collection, class: "flex flex-column gap txt-large", data: { controller: "form" } do |form| %>
-      <div class="flex align-center gap">
-        <label class="flex-item-grow">
-          <strong><%= form.text_field :name, name: "collection[name]", class: "input full-width",
-                required: true, autofocus: true, placeholder: "Give it a name…",
-                data: { action: "keydown.enter->form#submit:prevent, keydown.esc->form#cancel" } %></strong>
-        </label>
-      </div>
 
-      <section class="margin-block fill-shade border-radius">
-        <%= access_menu_tag @collection do %>
-          <li class="flex align-center gap pad unpad-block-end txt-normal">
-            <figure class="avatar flex-item-no-shrink" style="--avatar-border-radius: 0; --avatar-size: 3.5ch; margin-inline: 0.3em;">
-              <%= icon_tag "everyone" %>
-              <span class="for-screen-reader">Everyone</span>
-            </figure>
-
-            <div class="min-width">
-              <div class="overflow-ellipsis fill-shade"><strong>Everyone</strong></div>
-            </div>
-
-            <hr class="separator--horizontal flex-item-grow" style="--border-color: var(--color-subtle-dark); --border-style: dashed" aria-hidden="true" />
-
-            <label for="collection_all_access" class="switch">
-              <%= form.check_box :all_access, class: "switch__input", checked: @collection.all_access?, data: { action: "change->toggle-class#toggle" } %>
-              <span class="switch__btn round"></span>
-              <span class="for-screen-reader">Give everyone access to this project</span>
-            </label>
-          </li>
-
-          <hr class="separator--horizontal margin-inline" style="--border-color: var(--color-subtle-dark);" aria-hidden="true" />
-
-          <% if User.active.count > 20 %>
-            <div class="pad-inline">
-              <input placeholder="Filter…" class="input input--transparent full-width" type="search" autocorrect="off" autocomplete="off" data-1p-ignore="true" data-action="input->filter#filter">
-            </div>
-          <% end %>
-
-          <div data-filter-target="list" class="users-list pad-inline">
-            <%= access_toggles_for @selected_users, selected: true %>
-
-            <% if @selected_users.any? && @unselected_users.any? %>
-              <hr class="separator full-width" style="--border-style: solid">
-            <% end %>
-
-            <%= access_toggles_for @unselected_users, selected: false %>
-          </div>
-        <% end %>
-      </section>
+      <%= render "collections/edit/name", form: form %>
+      <%= render "collections/edit/users", collection: @collection, selected_users: @selected_users, unselected_users: @unselected_users, form: form %>
 
       <button type="submit" id="log_in" class="btn btn--reversed center txt-normal">
         <%= icon_tag "check" %>
@@ -76,33 +31,10 @@
   </div>
 
   <div class="panel shadow center flex flex-column">
-    <strong class="txt-large">Auto-Close Cards</strong>
-    <label for="closure" class="margin-block-end">Cards automatically close when there is no activity for…</label>
-    <%= select_tag :closure, options_for_select(Card::Closeable::AUTO_CLOSE_OPTIONS, Card::Closeable::AUTO_CLOSE_AFTER), { class: "input input--select full-width margin-block-end", data: { action: "change->form#submit" } } %>
+    <%= render "collections/edit/auto_close", collection: @collection %>
 
     <hr class="separator--horizontal full-width margin-block" style="--border-color: var(--color-subtle);" aria-hidden="true" />
-
-    <strong class="txt-large">Workflows</strong>
-    <div class="flex justify-center margin-block-end">Use a Workflow to track progress in this Collection.</div>
-    <div class="flex flex-wrap gap">
-      <% Workflow.all.each do |workflow| %>
-        <div class="workflow-preview txt-align-start border border-radius <%= 'workflow-preview--selected' if workflow == @collection.workflow %>">
-          <%= button_to collection_workflow_path(@collection), method: :patch do %>
-            <%= hidden_field_tag "collection[workflow_id]", workflow.id %>
-            <strong class="txt-small overflow-ellipsis"><%= workflow.name %></strong>
-            <ul class="list-style-none txt-xx-small ">
-              <% workflow.stages.each do |stage| %>
-                <li class="overflow-ellipsis flex align-center gap-half min-width">
-                  <span class="workflow-preview__swatch btn btn--circle" style="--btn-background: <%= stage.color.present? ? stage.color : Card::Colored::DEFAULT_COLOR %>;"></span>
-                  <span class="overflow-ellipsis"><%= stage.name %></span>
-                </li>
-              <% end %>
-            </ul>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-    <p class="margin-block-end-double"><%= link_to "Manage workflows", workflows_path, class: "btn btn--plain txt-link" %></p>
+    <%= render "collections/edit/workflows", collection: @collection %>
 
     <hr class="separator--horizontal full-width" style="--border-color: var(--color-subtle); margin-block-start: auto;" aria-hidden="true" />
 

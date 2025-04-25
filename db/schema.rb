@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_04_25_070025) do
+ActiveRecord::Schema[8.1].define(version: 2025_04_25_092727) do
   create_table "accesses", force: :cascade do |t|
     t.integer "collection_id", null: false
     t.datetime "created_at", null: false
@@ -141,11 +141,13 @@ ActiveRecord::Schema[8.1].define(version: 2025_04_25_070025) do
 
   create_table "collections", force: :cascade do |t|
     t.boolean "all_access", default: false, null: false
+    t.bigint "auto_close_period"
     t.datetime "created_at", null: false
     t.integer "creator_id", null: false
     t.string "name", null: false
     t.datetime "updated_at", null: false
     t.integer "workflow_id"
+    t.index ["auto_close_period"], name: "index_collections_on_auto_close_period"
     t.index ["creator_id"], name: "index_collections_on_creator_id"
     t.index ["workflow_id"], name: "index_collections_on_workflow_id"
   end
@@ -292,7 +294,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_04_25_070025) do
     t.datetime "created_at", null: false
     t.string "title"
     t.datetime "updated_at", null: false
-    t.index ["title"], name: "index_tags_on_account_id_and_title", unique: true
   end
 
   create_table "users", force: :cascade do |t|

@@ -15,7 +15,7 @@
     justify-content: end;
     padding: var(--block-space-half) var(--inline-space) calc(var(--block-space-half) / 2);
     position: fixed;
-    z-index: 2;
+    z-index: var(--z-tray);
 
     .tray__item {
       --offset: calc((var(--position) - 1) * (var(--block-space) * -1));

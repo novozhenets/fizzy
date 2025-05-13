@@ -10,7 +10,7 @@
   max-inline-size: var(--panel-size) !important;
   position: absolute;
   translate: 0 -50%;
-  z-index: 2;
+  z-index: var(--z-popup);
 
   &[open] {
     display: flex;

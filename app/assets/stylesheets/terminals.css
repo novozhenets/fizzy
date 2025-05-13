@@ -9,7 +9,7 @@
     inset: auto 0 0 0;
     padding: var(--block-space) calc(var(--tray-size) + var(--inline-space) * 3);
     position: fixed;
-    z-index: 1;
+    z-index: var(--z-terminal);
 
     @media (prefers-color-scheme: dark) {
       background-color: var(--color-black);

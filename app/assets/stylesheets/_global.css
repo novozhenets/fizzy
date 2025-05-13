@@ -33,6 +33,14 @@
   /* Components */
   --btn-size: 2.65em;
 
+  /* Z-index */
+  --z-events-column-header: 1;
+  --z-events-day-header: 2;
+  --z-popup: 10;
+  --z-terminal: 20;
+  --z-tray: 21;
+
+
   /* OKLCH colors: Fixed */
   --lch-black: 0% 0 0;
   --lch-white: 100% 0 0;

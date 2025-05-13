@@ -10,14 +10,14 @@
     max-inline-size: min(50ch, 90vw);
     position: absolute;
     transform: translateX(-50%);
-    z-index: 2;
+    z-index: var(--z-popup);
 
     &[open] {
       display: flex;
     }
 
     #header:has(&) {
-      max-inline-size: 100%;
+      max-inline-size: 100vw;
       position: relative;
       z-index: 5;
 
@@ -41,7 +41,7 @@
     .btn {
       --btn-background: transparent;
     }
-    
+
     @media (any-hover: hover) {
       &:hover {
         background: var(--color-selected);
@@ -110,7 +110,7 @@
     .icon {
       margin-inline-end: 0.5em;
     }
-    
+
     padding-inline-start: var(--inline-space-half);
   }
 

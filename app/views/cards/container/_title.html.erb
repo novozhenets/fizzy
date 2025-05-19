@@ -15,6 +15,7 @@
       <%= form.text_area :title, placeholder: "Name it…",
             class: "input input--textarea full-width borderless txt-align-start",
             autofocus: card.title.blank?,
+            rows: 2,
             data: { action: "auto-save#change blur->auto-save#submit keydown.enter->auto-save#submit:prevent keydown.ctrl+enter->auto-save#submit:prevent" } %>
     </h1>
     <div class="card__description markdown-content margin-block-start-half margin-block-end">

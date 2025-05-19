@@ -4,7 +4,7 @@
       <%= form.label :title, class: "flex flex-column align-center" do %>
         <%= form.text_area :title, class: "input input--textarea full-width borderless txt-align-start card-field__title",
               required: true, autofocus: true, placeholder: "Name it…",
-              rows: 1,
+              rows: 2,
               data: { action: "keydown.enter->form#submit:prevent keydown.ctrl+enter->form#submit:prevent keydown.meta+enter->form#submit:prevent keydown.esc->form#cancel focus->form#select" } %>
       <% end %>
     </h1>

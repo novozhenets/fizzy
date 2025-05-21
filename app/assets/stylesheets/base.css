@@ -59,6 +59,7 @@
       outline-offset: var(--outline-offset, calc(var(--outline-size) * 2));
     }
 
+    &:where(:focus-visible):focus,
     &:where(:focus-visible):active {
       outline: 0;
     }

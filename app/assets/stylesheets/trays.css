@@ -21,6 +21,11 @@
     position: fixed;
     z-index: var(--z-tray);
 
+    &:where(:focus-visible):focus,
+    &:where(:focus-visible):active {
+      outline: 0;
+    }
+
     :where(.tray__item) {
       --tray-item-delay: calc((var(--tray-item-index) - 1) * 10ms);
       --tray-item-y: calc((var(--tray-item-index) - 1) * (var(--tray-item-offset) * -1) - var(--tray-bottom-padding));

@@ -1,5 +1,8 @@
 class Workflow < ApplicationRecord
-  DEFAULT_STAGES = [ "Figuring it out", "In progress" ]
+  DEFAULT_STAGES = [
+    { name: "Figuring it out", color: "var(--color-card-5)" },
+    { name: "In progress", color: "var(--color-card-3)" }
+  ]
 
   has_many :stages, dependent: :delete_all
 
@@ -7,6 +10,6 @@ class Workflow < ApplicationRecord
 
   private
     def create_default_stages
-      Workflow::Stage.insert_all(DEFAULT_STAGES.map { { name: it, workflow_id: id } })
+      Workflow::Stage.insert_all(DEFAULT_STAGES.map { { name: it[:name], color: it[:color], workflow_id: id } })
     end
 end

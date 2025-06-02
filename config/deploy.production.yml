@@ -16,6 +16,9 @@ proxy:
 ssh:
   user: app
 
+env:
+  clear:
+    RAILS_ENV: production
 
 x-beamer-accessory: &beamer-accessory
   image: basecamp/beamer

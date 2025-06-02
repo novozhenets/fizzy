@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_05_23_084734) do
+ActiveRecord::Schema[8.1].define(version: 2025_06_01_161653) do
   create_table "accesses", force: :cascade do |t|
     t.integer "collection_id", null: false
     t.datetime "created_at", null: false
@@ -27,16 +27,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_05_23_084734) do
     t.string "join_code"
     t.string "name", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "action_text_markdowns", force: :cascade do |t|
-    t.text "content", default: "", null: false
-    t.datetime "created_at", null: false
-    t.string "name", null: false
-    t.integer "record_id", null: false
-    t.string "record_type", null: false
-    t.datetime "updated_at", null: false
-    t.index ["record_type", "record_id"], name: "index_action_text_markdowns_on_record"
   end
 
   create_table "action_text_rich_texts", force: :cascade do |t|
@@ -308,7 +298,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_05_23_084734) do
     t.datetime "created_at", null: false
     t.string "title"
     t.datetime "updated_at", null: false
-    t.index ["title"], name: "index_tags_on_account_id_and_title", unique: true
   end
 
   create_table "users", force: :cascade do |t|

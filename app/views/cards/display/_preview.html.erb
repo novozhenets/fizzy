@@ -29,12 +29,8 @@
 
     <%= render "cards/display/common/background", card: card %>
 
-    <% if card.auto_closing? %>
-      <% if card.considering? %>
-        <%= render "cards/display/preview/bubble", card: card, style: "closing" %>
-      <% elsif card.doing? %>
-        <%= render "cards/display/preview/bubble", card: card, style: "considering" %>
-      <% end %>
+    <% if card.subject_to_entropy? %>
+      <%= render "cards/display/preview/bubble", card: card %>
     <% end %>
   <% end %>
 <% end %>

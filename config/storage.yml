@@ -1,36 +1,21 @@
 test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage/%{tenant}") %>
-  tenanted: true
 
 local:
   service: Disk
   root: <%= Rails.root.join("storage", "tenants", Rails.env, "%{tenant}", "files") %>
-  tenanted: true
 
-# Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
-# amazon:
-#   service: S3
-#   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-#   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-#   region: us-east-1
-#   collection: your_own_collection-<%= Rails.env %>
-
-# Remember not to checkin your GCS keyfile to a repository
-# google:
-#   service: GCS
-#   project: your_project
-#   credentials: <%= Rails.root.join("path/to/gcs.keyfile") %>
-#   collection: your_own_collection-<%= Rails.env %>
-
-# Use bin/rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
-# microsoft:
-#   service: AzureStorage
-#   storage_account_name: your_account_name
-#   storage_access_key: <%= Rails.application.credentials.dig(:azure_storage, :storage_access_key) %>
-#   container: your_container_name-<%= Rails.env %>
-
-# mirror:
-#   service: Mirror
-#   primary: local
-#   mirrors: [ amazon, google, microsoft ]
+# We have "development", "staging", and "production" buckets configured. Note that we don't have a
+# "beta" bucket. (As of 2025-06-01.)
+purestorage:
+  service: S3
+  bucket: fizzy-<%= Rails.env %>-activestorage
+  endpoint: "https://storage.basecamp.com"
+  ssl_verify_peer: false # FIXME: using self-signed cert internally
+  force_path_style: true
+  request_checksum_calculation: when_required # default is when_supported with CRC64NVME checksum which FlashBlade doesn't support
+  response_checksum_validation: when_required # default is when_supported with CRC64NVME checksum which FlashBlade doesn't support
+  region: us-east-1 # default region required for signer
+  access_key_id: <%= Rails.application.credentials.dig(:active_storage, :purestorage_service, :access_key_id) %>
+  secret_access_key: <%= Rails.application.credentials.dig(:active_storage, :purestorage_service, :secret_access_key) %>

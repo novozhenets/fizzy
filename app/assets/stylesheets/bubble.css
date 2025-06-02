@@ -52,12 +52,12 @@
   }
 }
 
-.bubble--closing {
+.bubble--considering {
   inset-inline-start: calc(-1 * var(--bubble-gap));
   translate: -100% -50%;
 }
 
-.bubble--considering {
+.bubble--doing {
   inset-inline-end: calc(-1 * var(--bubble-gap));
   translate: 100% -50%;
 }

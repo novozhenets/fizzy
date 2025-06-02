@@ -123,4 +123,8 @@ Rails.application.routes.draw do
 
 
   root "events#index"
+
+  namespace :admin do
+    mount MissionControl::Jobs::Engine, at: "/jobs"
+  end
 end

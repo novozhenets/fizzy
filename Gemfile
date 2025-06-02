@@ -2,7 +2,6 @@ source "https://rubygems.org"
 git_source(:bc) { |repo| "https://github.com/basecamp/#{repo}" }
 
 gem "rails", github: "rails/rails", branch: "main"
-gem "active_record-tenanted", bc: "active_record-tenanted"
 
 # Assets & front end
 gem "importmap-rails"
@@ -11,6 +10,7 @@ gem "stimulus-rails"
 gem "turbo-rails"
 
 # Deployment and drivers
+gem "active_record-tenanted", bc: "active_record-tenanted"
 gem "bootsnap", require: false
 gem "kamal", require: false
 gem "puma", ">= 5.0"
@@ -30,8 +30,10 @@ gem "jbuilder"
 gem "actiontext-lexical", bc: "actiontext-lexical"
 gem "image_processing", "~> 1.14"
 gem "platform_agent"
+gem "aws-sdk-s3", require: false
 
-# Telemetry and logging
+# Telemetry, logging, and operations
+gem "mission_control-jobs"
 gem "sentry-ruby"
 gem "sentry-rails"
 gem "rails_structured_logging", bc: "rails-structured-logging"

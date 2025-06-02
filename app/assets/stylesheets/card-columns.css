@@ -101,7 +101,6 @@
       --text-small: 1.1em;
 
       background-color: var(--color-canvas);
-      box-shadow: 0 0 0 1px var(--color-ink-lighter);
       line-height: 1.2;
 
       .avatar {
@@ -120,6 +119,22 @@
 
     .card__background {
       display: none;
+    }
+
+    .card__collection {
+      background-color: var(--color-canvas);
+      color: color-mix(in srgb, var(--card-color) 40%, var(--color-ink));
+      padding: 0 0 0 var(--inline-space);
+    }
+
+    .card__collection-name {
+      border-inline-start: 1px solid color-mix(in srgb, var(--color-ink) 33%, var(--color-canvas));
+      color: color-mix(in srgb, var(--card-color) 40%, var(--color-ink));
+    }
+
+    .card__header {
+      color: color-mix(in srgb, var(--card-color) 40%, var(--color-ink));
+      margin: 0 0 calc(-0.5 * var(--card-padding-inline)) 0;
     }
 
     .card__title {

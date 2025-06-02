@@ -23,8 +23,8 @@ builder:
 
 env:
   secret:
-    - SECRET_KEY_BASE
-    - OPEN_AI_API_KEY
+    - RAILS_MASTER_KEY
 
 aliases:
   console: app exec -i --reuse "bin/rails console"
+  ssh: app exec -i --reuse /bin/bash

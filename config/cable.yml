@@ -12,5 +12,8 @@ development:
 test:
   adapter: test
 
-production:
+production: &production
   <<: *cable
+
+beta:
+  <<: *production

@@ -4,7 +4,7 @@
       <h1 class="card__title flex align-start gap-half">
         <%= link_to card.title, edit_collection_card_path(card.collection, card), class: "card__title-link" %>
       </h1>
-      <div class="card__description rich-text-content margin-block-half rich-text-content" data-controller="syntax-highlight">
+      <div class="card__description rich-text-content margin-block-half rich-text-content" data-controller="syntax-highlight retarget-links">
         <%= card.description %>
       </div>
     </div>

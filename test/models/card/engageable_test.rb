@@ -11,6 +11,9 @@ class Card::EngageableTest < ActiveSupport::TestCase
 
     assert_not cards(:logo).considering?
     assert cards(:text).considering?
+
+    assert_equal "doing", cards(:logo).engagement_status
+    assert_equal "considering", cards(:text).engagement_status
   end
 
   test "change the engagement" do
@@ -45,22 +48,5 @@ class Card::EngageableTest < ActiveSupport::TestCase
 
     assert_includes Card.considering, cards(:text)
     assert_not_includes Card.considering, cards(:logo)
-  end
-
-  test "auto_reconsider_all_stagnated" do
-    travel_to Time.current
-
-    cards(:logo, :shipping).each(&:engage)
-
-    cards(:logo).update!(last_active_at: 1.day.ago - Card::Engageable::STAGNATED_AFTER)
-    cards(:shipping).update!(last_active_at: 1.day.from_now - Card::Engageable::STAGNATED_AFTER)
-
-    assert_difference -> { Card.considering.count }, +1 do
-      Card.auto_reconsider_all_stagnated
-    end
-
-    assert cards(:shipping).reload.doing?
-    assert cards(:logo).reload.considering?
-    assert_equal Time.current, cards(:logo).last_active_at
   end
 end

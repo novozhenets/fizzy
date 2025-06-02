@@ -10,6 +10,9 @@ proxy:
   hosts:
     - fizzy.37signals.works # the single tenant is named "fizzy"
 
+env:
+  clear:
+    RAILS_ENV: beta
 
 x-beamer-accessory: &beamer-accessory
   image: basecamp/beamer
@@ -21,7 +24,6 @@ x-beamer-accessory: &beamer-accessory
     user: 1000 # Match the UID of the Rails app, for volume permissions
   volumes:
     - fizzy:/storage
-
 
 accessories:
   beamer-primary:

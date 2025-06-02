@@ -23,12 +23,10 @@
   --border: 1px solid var(--color-ink-lighter);
 
   /* Shadows */
-  --shadow: 0 0 0 1px oklch(var(--lch-black) / 0.02),
-            0 .2em 1.6em -0.8em oklch(var(--lch-black) / 0.2),
-            0 .4em 2.4em -1em oklch(var(--lch-black) / 0.3),
-            0 .4em .8em -1.2em oklch(var(--lch-black) / 0.4),
-            0 .8em 1.2em -1.6em oklch(var(--lch-black) / 0.5),
-            0 1.2em 1.6em -2em oklch(var(--lch-black) / 0.6);
+  --shadow: 0 0 0 1px oklch(var(--lch-black) / 5%),
+            0 0.2em 0.2em oklch(var(--lch-black) / 5%),
+            0 0.4em 0.4em oklch(var(--lch-black) / 5%),
+            0 0.8em 0.8em oklch(var(--lch-black) / 5%);
 
   /* Components */
   --btn-size: 2.65em;
@@ -186,7 +184,7 @@
   --color-code-token__punctuation: oklch(var(--lch-ink-dark));
   --color-code-token__selector: oklch(var(--lch-green-dark));
   --color-code-token__variable: oklch(var(--lch-red-dark));
-  
+
 
   @media (prefers-color-scheme: dark) {
     --lch-canvas: 20% 0.0195 232.58;

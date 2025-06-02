@@ -11,7 +11,7 @@ class UploadsController < ApplicationController
 
   def show
     expires_in 5.minutes, public: true
-    redirect_to @attachment.url
+    redirect_to @attachment.url, allow_other_host: true
   end
 
   private

@@ -17,6 +17,9 @@ development:
 test:
   <<: *default_options
 
-production:
+production: &production
   <<: *default_connection
   <<: *default_options
+
+beta:
+  <<: *production

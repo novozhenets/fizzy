@@ -1,4 +1,4 @@
-production:
+production: &production
   auto_close_all_due:
     class: Card::AutoCloseAllDueJob
     schedule: every hour
@@ -14,3 +14,6 @@ production:
   delete_unused_tags:
     class: DeleteUnusedTagsJob
     schedule: every day at 04:00
+
+beta:
+  <<: *production

@@ -25,6 +25,10 @@
     .avatar {
       --avatar-size: 2.75em;
     }
+
+    @media (prefers-color-scheme: dark) {
+      box-shadow: 0 0 0 1px var(--color-ink-lighter);
+    }
   }
 
   /* Children
@@ -69,11 +73,6 @@
     margin-block-start: calc(-1 * var(--card-padding-block));
     margin-inline-start: calc(-1 * var(--card-padding-inline));
     min-inline-size: 0;
-
-    .cards--considering & {
-      color: color-mix(in srgb, var(--card-color) 40%, var(--color-ink));
-      margin: 0 0 calc(-0.5 * var(--card-padding-inline)) 0;
-    }
   }
 
   .card__collection {
@@ -211,6 +210,7 @@
     box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-link) 20%, var(--color-canvas));
     color: var(--btn-color);
     font-weight: 700;
+    transition: none;
   }
 
   .card__move-button {

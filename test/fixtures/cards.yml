@@ -6,7 +6,7 @@ logo:
   due_on: <%= 3.days.from_now %>
   created_at: <%= 1.week.ago %>
   status: published
-  last_active_at: <%= Time.current %>
+  last_active_at: <%= 1.week.ago %>
 
 layout:
   collection: writebook
@@ -15,16 +15,15 @@ layout:
   title: Layout is broken
   created_at: <%= 1.week.ago %>
   status: published
-  last_active_at: <%= Time.current %>
+  last_active_at: <%= 1.week.ago %>
 
 text:
   collection: writebook
   creator: kevin
-  stage: qa_triage
   title: The text is too small
   created_at: <%= 1.week.ago %>
   status: published
-  last_active_at: <%= Time.current %>
+  last_active_at: <%= 1.week.ago %>
   stage: qa_in_progress
 
 shipping:
@@ -34,4 +33,4 @@ shipping:
   title: We need to ship the app
   created_at: <%= 1.week.ago %>
   status: published
-  last_active_at: <%= Time.current %>
+  last_active_at: <%= 1.week.ago %>

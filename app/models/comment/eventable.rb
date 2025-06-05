@@ -8,7 +8,7 @@ module Comment::Eventable
   end
 
   def event_was_created(event)
-    card.touch(:last_active_at)
+    card.touch_last_active_at
   end
 
   private

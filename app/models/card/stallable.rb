@@ -9,7 +9,8 @@ module Card::Stallable
     scope :with_activity_spikes, -> { joins(:activity_spike) }
     scope :stalled, -> { open.with_activity_spikes.where("card_activity_spikes.updated_at": ..STALLED_AFTER_LAST_SPIKE_PERIOD.ago) }
 
-    after_update_commit :detect_activity_spikes_later, if: :saved_change_to_last_active_at?
+    before_update :remember_to_detect_activity_spikes
+    after_update_commit :detect_activity_spikes_later, if: :should_detect_activity_spikes?
   end
 
   def stalled?
@@ -25,6 +26,14 @@ module Card::Stallable
   end
 
   private
+    def remember_to_detect_activity_spikes
+      @should_detect_activity_spikes = published? && last_active_at_changed?
+    end
+
+    def should_detect_activity_spikes?
+      @should_detect_activity_spikes
+    end
+
     def detect_activity_spikes_later
       Card::ActivitySpike::DetectionJob.perform_later(self)
     end

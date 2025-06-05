@@ -35,4 +35,16 @@ class Card::StallableTest < ActiveSupport::TestCase
     assert cards(:logo).reload.stalled?
     assert_includes Card.stalled, cards(:logo)
   end
+
+  test "don't detect activity spikes when updating attributes other than last_active_at" do
+    assert_no_enqueued_jobs only: Card::ActivitySpike::DetectionJob do
+      cards(:logo).update! created_at: 1.day.ago
+    end
+  end
+
+  test "don't detect activity spikes when creating new cards" do
+    assert_no_enqueued_jobs only: Card::ActivitySpike::DetectionJob do
+      collections(:writebook).cards.create! title: "A new card", creator: users(:kevin)
+    end
+  end
 end

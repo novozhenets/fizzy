@@ -12,8 +12,13 @@ module Card::Eventable
   def event_was_created(event)
     transaction do
       create_system_comment_for(event)
-      touch(:last_active_at)
+      touch_last_active_at
     end
+  end
+
+  def touch_last_active_at
+    # Not using touch so that we can detect attribute change on callbacks
+    update!(last_active_at: Time.current)
   end
 
   private

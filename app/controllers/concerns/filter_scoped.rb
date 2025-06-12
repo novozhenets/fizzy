@@ -2,7 +2,7 @@ module FilterScoped
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_filter, only: :index
+    before_action :set_filter
   end
 
   private

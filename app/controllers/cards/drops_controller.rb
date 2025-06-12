@@ -1,5 +1,6 @@
 class Cards::DropsController < ApplicationController
-  before_action :set_filter, :set_card, :set_drop_target
+  include FilterScoped
+  before_action :set_card, :set_drop_target
 
   def create
     perform_drop_action
@@ -8,10 +9,6 @@ class Cards::DropsController < ApplicationController
 
   private
     VALID_DROP_TARGETS = %w[ considering doing ]
-
-    def set_filter
-      @filter = Current.user.filters.from_params params.reverse_merge(**FilterScoped::DEFAULT_PARAMS).permit(*Filter::PERMITTED_PARAMS)
-    end
 
     def set_card
       @card = Current.user.accessible_cards.find(params[:dropped_item_id])

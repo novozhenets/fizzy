@@ -1,0 +1,15 @@
+@layer components {
+  .drag-and-drop__dragged-item {
+    box-shadow: none;
+    filter: grayscale(1) brightness(0.97);
+    opacity: 0.6;
+    outline: 2px dashed var(--color-selected-dark);
+  }
+
+  .drag-and-drop__hover-container {
+    background-color: var(--color-selected-light);
+    border-radius: 0.2em;
+    outline: 2px dashed var(--color-selected-dark);
+    transition: background-color 200ms;
+  }
+}

@@ -65,7 +65,7 @@ module CardsHelper
     title.join(" ")
   end
 
-  def cacheable_preview_parts_for(card)
-    [ card, card.collection.workflow, card.collection.entropy_configuration ]
+  def cacheable_preview_parts_for(card, *options)
+    [ card, card.collection.workflow, card.collection.entropy_configuration, *options ]
   end
 end

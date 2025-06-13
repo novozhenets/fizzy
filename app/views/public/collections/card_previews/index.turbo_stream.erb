@@ -2,7 +2,7 @@
 
 <%= turbo_stream.append params[:target] do %>
   <%= render partial: "cards/display/public_preview",
-        collection: @page.records, as: :card, cached: true %>
+        collection: @page.records, as: :card, locals: { draggable: true }, cached: true %>
 
   <% unless @page.last? %>
     <%= public_collection_cards_next_page_link @collection, params[:target], page: @page, fetch_on_visible: params[:target] == "closed-cards" %>

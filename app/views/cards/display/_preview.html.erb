@@ -1,5 +1,7 @@
-<% cache cacheable_preview_parts_for(card) do %>
-  <%= card_article_tag card, class: "card" do %>
+<% draggable = local_assigns.fetch(:draggable, false) %>
+
+<% cache cacheable_preview_parts_for(card, draggable) do %>
+  <%= card_article_tag card, class: "card", draggable: draggable, data: { id: card.id, drag_and_drop_target: "item" } do %>
     <div class="flex gap">
       <div class="flex flex-column flex-item-grow max-inline-size">
         <header class="card__header">
@@ -13,7 +15,7 @@
               <%= card.title %>
             </h1>
 
-            <%= link_to collection_card_path(card.collection, card), class: "card__link", title: card_title_tag(card), data: { action: "dialog#close", turbo_frame: "_top" } do %>
+            <%= link_to collection_card_path(card.collection, card), draggable: false, class: "card__link", title: card_title_tag(card), data: { action: "dialog#close", turbo_frame: "_top" } do %>
               <span class="for-screen-reader"><%= card.title %></span>
             <% end %>
           </div>

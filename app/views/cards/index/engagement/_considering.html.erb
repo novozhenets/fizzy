@@ -1,4 +1,4 @@
-<section id="considering-cards" class="cards cards--considering">
+<section id="considering-cards" class="cards cards--considering" data-drag-and-drop-target="container"  data-drop-target="considering">
   <h2 class="cards__heading">
     Considering
   </h2>
@@ -13,7 +13,7 @@
   <% end %>
 
   <% if page.used? %>
-    <%= render partial: "cards/display/preview", collection: page.records, as: :card, cached: true %>
+    <%= render partial: "cards/display/preview", collection: page.records, as: :card, locals: { draggable: true }, cached: true %>
 
     <% unless page.last? %>
       <%= cards_next_page_link "considering-cards", page: page, filter: filter %>

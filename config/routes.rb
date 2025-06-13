@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   namespace :cards do
     resources :previews
+    resources :drops
   end
 
   resources :cards do

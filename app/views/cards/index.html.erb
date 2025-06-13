@@ -13,9 +13,20 @@
   <%= render "filters/settings", filter: @filter %>
 </header>
 
-<div class="card-columns">
-  <%= render "cards/index/engagement/considering", **@considering.to_h %>
-  <%= render "cards/index/engagement/doing", **@doing.to_h %>
-</div>
+<%= tag.div data: {
+      controller: "drag-and-drop",
+      drag_and_drop_dragged_item_class: "drag-and-drop__dragged-item",
+      drag_and_drop_hover_container_class: "drag-and-drop__hover-container",
+      drag_and_drop_url_value: cards_drops_path(**@filter.as_params),
+      action: "
+        dragstart->drag-and-drop#dragStart
+        dragover->drag-and-drop#dragOver
+        drop->drag-and-drop#drop
+        dragend->drag-and-drop#dragEnd" } do %>
+  <div class="card-columns">
+    <%= render "cards/index/engagement/considering", **@considering.to_h %>
+    <%= render "cards/index/engagement/doing", **@doing.to_h %>
+  </div>
 
-<%= render "cards/index/engagement/closed", **@closed.to_h %>
+  <%= render "cards/index/engagement/closed", **@closed.to_h %>
+<% end %>

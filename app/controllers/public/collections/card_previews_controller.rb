@@ -17,8 +17,7 @@ class Public::Collections::CardPreviewsController < ApplicationController
       when "closed-cards"
         @collection.cards.closed.recently_closed_first
       else
-        head :bad_request
-        Card.none
+        raise ActionController::BadRequest
       end
     end
 end

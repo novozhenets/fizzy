@@ -160,6 +160,7 @@
   --color-negative: oklch(var(--lch-red-dark));
   --color-positive: oklch(var(--lch-green-dark));
   --color-link: oklch(var(--lch-blue-dark));
+  --color-selected-light: oklch(var(--lch-blue-lightest));
   --color-selected: oklch(var(--lch-blue-lighter));
   --color-selected-dark: oklch(var(--lch-blue-light));
   --color-highlight: oklch(var(--lch-yellow-lighter));

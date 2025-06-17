@@ -56,3 +56,5 @@ accessories:
       publish:
         - 80:80
         - 443:443
+    volumes:
+      - load-balancer:/home/kamal-proxy/.config/kamal-proxy

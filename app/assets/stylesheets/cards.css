@@ -290,20 +290,20 @@
 
   .card__closed {
     align-items: center;
-    aspect-ratio: 8/5;
-    border: 0.75ch solid var(--card-color);
     border-radius: 0.2em;
+    border: 0.75ch solid var(--card-color);
     color: var(--card-color);
     display: flex;
     flex-direction: column;
     font-weight: bold;
-    inset: auto var(--block-space) var(--block-space-double) auto;
+    inset: auto 1ch 1ch auto;
     justify-content: center;
     max-inline-size: 25ch;
     min-inline-size: 16ch;
     mix-blend-mode: multiply;
     padding: 1ch;
     position: absolute;
+    transform-origin: bottom left;
     transform: rotate(-10deg);
 
     @media (prefers-color-scheme: dark) {

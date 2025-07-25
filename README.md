@@ -41,9 +41,27 @@ Comment.find_each(&:refresh_search_embedding)
 
 ### Tests
 
+#### AI Requests
+
 For testing OpenAI API requests, we use [VCR](https://github.com/vcr/vcr). If you want to test AI features exercising the API, you need to place the `config/credentials/test.key`
 that you can get from 1Password in "Fizzy - test.key". Then, when running tests that use Open AI API, you must either set the env variable `VCR_RECORD=1`
 or to add `vcr_record!` to the test. See `VcrTestHelper`. Due to Open AI quotas, you may need to limit the parallelization. E.g: `PARALLEL_WORKERS=2`
+
+You can regenerate all the VCR fixtures with:
+
+```bash
+VCR_RECORD=1 PARALLEL_WORKERS=2 bin/rails test
+```
+
+A typical scenario is making modifications LLM prompts. You need to:
+
+1. Make the prompt changes.
+2. Run the test with `VCR_RECORD=1` set.
+3. Make sure that the test passes by running the test normally (without setting VCR_RECORD=1).
+4. Commit the YML fixtures that VCR has generated. That way, the next time you run the test, it will run fast without performing any request.
+
+Notice that if you pass changing data to the prompt, this mechanism won't work. E.g: if you pass data timestamps.
+You need to make sure those timestamps are always the same across executions.
 
 ## Environments
 

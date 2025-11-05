@@ -239,6 +239,7 @@
     block-size: var(--column-width-collapsed);
     inline-size: var(--column-width-collapsed);
     opacity: 0;
+    outline-offset: -2px;
 
     .cards:hover &,
     &:focus-visible {

@@ -3,16 +3,14 @@ module ApplicationCable
     identified_by :current_user
 
     def connect
-      super
       set_current_user || reject_unauthorized_connection
     end
 
     private
       def set_current_user
         if session = find_session_by_cookie
-          # # TODO:PLANB: not sure how to fix this
-          # membership = session.identity.memberships.find_by!(tenant: current_tenant)
-          # self.current_user = membership.user if membership.user.active?
+          membership = session.identity.memberships.find_by!(tenant: request.env["fizzy.external_account_id"])
+          self.current_user = membership.user if membership.user.active?
         end
       end
 

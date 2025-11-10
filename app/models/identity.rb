@@ -1,4 +1,4 @@
-class Identity < UntenantedRecord
+class Identity < ApplicationRecord
   include Transferable
 
   has_many :memberships, dependent: :destroy

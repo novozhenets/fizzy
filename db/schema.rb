@@ -262,6 +262,35 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_06_154151) do
     t.index ["tag_id"], name: "index_filters_tags_on_tag_id"
   end
 
+  create_table "identities", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "email_address", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_address"], name: "index_identities_on_email_address", unique: true
+  end
+
+  create_table "magic_links", force: :cascade do |t|
+    t.string "code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "expires_at", null: false
+    t.integer "identity_id"
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_magic_links_on_code", unique: true
+    t.index ["expires_at"], name: "index_magic_links_on_expires_at"
+    t.index ["identity_id"], name: "index_magic_links_on_identity_id"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "identity_id", null: false
+    t.string "join_code"
+    t.string "tenant", null: false
+    t.datetime "updated_at", null: false
+    t.index ["identity_id"], name: "index_memberships_on_identity_id"
+    t.index ["tenant", "identity_id"], name: "index_memberships_on_tenant_and_identity_id", unique: true
+    t.index ["tenant"], name: "index_memberships_on_user_tenant_and_user_id"
+  end
+
   create_table "mentions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "mentionee_id", null: false
@@ -455,6 +484,8 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_06_154151) do
   add_foreign_key "columns", "boards"
   add_foreign_key "comments", "cards"
   add_foreign_key "events", "boards"
+  add_foreign_key "magic_links", "identities"
+  add_foreign_key "memberships", "identities"
   add_foreign_key "mentions", "users", column: "mentionee_id"
   add_foreign_key "mentions", "users", column: "mentioner_id"
   add_foreign_key "notification_bundles", "users"

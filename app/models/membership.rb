@@ -1,4 +1,4 @@
-class Membership < UntenantedRecord
+class Membership < ApplicationRecord
   include EmailAddressChangeable
 
   belongs_to :identity, touch: true

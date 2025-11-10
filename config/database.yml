@@ -1,25 +1,23 @@
 default: &default
-  adapter: trilogy
-  host: localhost:33384
-  user: root
+  adapter: sqlite3
   pool: 50
   timeout: 5000
 
 development:
   primary:
     <<: *default
-    database: fizzy_development
+    database: storage/fizzy_development.sqlite3
   cable:
     <<: *default
-    database: fizzy_development_cable
+    database: storage/development_cable.sqlite3
     migrations_paths: db/cable_migrate
   cache:
     <<: *default
-    database: fizzy_development_cache
+    database: storage/development_cache.sqlite3
     migrations_paths: db/cache_migrate
   queue:
     <<: *default
-    database: fizzy_development_queue
+    database: storage/development_queue.sqlite3
     migrations_paths: db/queue_migrate
 
 # Warning: The database defined as "test" will be erased and
@@ -28,24 +26,23 @@ development:
 test:
   primary:
     <<: *default
-    database: fizzy_test
+    database: storage/fizzy_test.sqlite3
 
 production: &production
   primary:
     <<: *default
-    adapter: beamer
-    database: fizzy_<%= Rails.env %>
+    database: storage/fizzy_<%= Rails.env %>.sqlite3
   cable:
     <<: *default
-    database: fizzy_<% Rails.env %>_cable.sqlite3
+    database: storage/production_cable.sqlite3
     migrations_paths: db/cable_migrate
   cache:
     <<: *default
-    database: fizzy_<% Rails.env %>_cache.sqlite3
+    database: storage/production_cache.sqlite3
     migrations_paths: db/cache_migrate
   queue:
     <<: *default
-    database: fizzy_<% Rails.env %>_queue.sqlite3
+    database: storage/production_queue.sqlite3
     migrations_paths: db/queue_migrate
 
 beta: *production

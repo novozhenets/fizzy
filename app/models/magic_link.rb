@@ -1,4 +1,4 @@
-class MagicLink < UntenantedRecord
+class MagicLink < ApplicationRecord
   CODE_LENGTH = 6
   EXPIRATION_TIME = 15.minutes
 

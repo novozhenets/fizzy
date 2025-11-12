@@ -1,4 +1,4 @@
-class Webhook::DelinquencyTracker < AccountScopedRecord
+class Webhook::DelinquencyTracker < ApplicationRecord
   DELINQUENCY_THRESHOLD = 10
   DELINQUENCY_DURATION = 1.hour
 

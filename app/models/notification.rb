@@ -1,4 +1,4 @@
-class Notification < AccountScopedRecord
+class Notification < ApplicationRecord
   include PushNotifiable
 
   belongs_to :account, default: -> { user.account }

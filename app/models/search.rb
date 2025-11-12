@@ -27,11 +27,13 @@ class Search
       query_string = query.to_s
       sanitized_raw_query = Search::Result.connection.quote(query.terms)
       table_name = Searchable.search_index_table_name(user.account_id)
+      uuid_type = ActiveRecord::Type.lookup(:uuid, adapter: :trilogy)
+      serialized_board_ids = board_ids.map { |id| uuid_type.serialize(id) }
 
       Search::Result.from(table_name)
         .joins("INNER JOIN cards ON #{table_name}.card_id = cards.id")
         .joins("INNER JOIN boards ON cards.board_id = boards.id")
-        .where("#{table_name}.board_id IN (?)", board_ids)
+        .where("#{table_name}.board_id IN (?)", serialized_board_ids)
         .where("MATCH(#{table_name}.content, #{table_name}.title) AGAINST(? IN BOOLEAN MODE)", query_string)
         .select([
           "#{table_name}.card_id as card_id",

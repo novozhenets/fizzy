@@ -1,4 +1,4 @@
-class Card < AccountScopedRecord
+class Card < ApplicationRecord
   include Assignable, Attachments, Closeable, Colored, Entropic, Eventable,
     Golden, Mentions, Multistep, Pinnable, Postponable, Promptable,
     Readable, Searchable, Stallable, Statuses, Taggable, Triageable, Watchable

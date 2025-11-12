@@ -1,4 +1,4 @@
-class Search::Query < AccountScopedRecord
+class Search::Query < ApplicationRecord
   validates :terms, presence: true
   before_validation :sanitize_terms
 

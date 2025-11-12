@@ -1,4 +1,4 @@
-class Filter < AccountScopedRecord
+class Filter < ApplicationRecord
   include Fields, Params, Resources, Summarized
 
   belongs_to :account, default: -> { Current.account }

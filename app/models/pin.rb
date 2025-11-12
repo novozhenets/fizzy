@@ -1,4 +1,4 @@
-class Pin < AccountScopedRecord
+class Pin < ApplicationRecord
   belongs_to :card
   belongs_to :user
 

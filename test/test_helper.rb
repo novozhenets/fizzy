@@ -136,9 +136,10 @@ module FixturesTestHelper
       bytes[14] = (rand_b >> 8) & 0xff
       bytes[15] = rand_b & 0xff
 
-      # Format as UUID string
+      # Format as UUID string and convert to base36 (25 chars)
       uuid = "%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x" % bytes
-      UuidPrimaryKey.uuid_to_base36(uuid)
+      hex = uuid.delete("-")
+      hex.to_i(16).to_s(36).rjust(25, "0")
     end
   end
 end

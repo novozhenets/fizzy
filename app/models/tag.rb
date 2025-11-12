@@ -1,4 +1,4 @@
-class Tag < AccountScopedRecord
+class Tag < ApplicationRecord
   include Attachable, Filterable
 
   belongs_to :account, default: -> { Current.account }

@@ -1,4 +1,4 @@
-class Webhook::Delivery < AccountScopedRecord
+class Webhook::Delivery < ApplicationRecord
   STALE_TRESHOLD = 7.days
   USER_AGENT = "fizzy/1.0.0 Webhook"
   ENDPOINT_TIMEOUT = 7.seconds

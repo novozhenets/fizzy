@@ -1,4 +1,4 @@
-class Assignment < AccountScopedRecord
+class Assignment < ApplicationRecord
   belongs_to :card, touch: true
 
   belongs_to :assignee, class_name: "User"

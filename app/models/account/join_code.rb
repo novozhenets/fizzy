@@ -1,4 +1,4 @@
-class Account::JoinCode < AccountScopedRecord
+class Account::JoinCode < ApplicationRecord
   CODE_LENGTH = 12
 
   belongs_to :account

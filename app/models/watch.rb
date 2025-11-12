@@ -1,4 +1,4 @@
-class Watch < AccountScopedRecord
+class Watch < ApplicationRecord
   belongs_to :user
   belongs_to :card, touch: true
 

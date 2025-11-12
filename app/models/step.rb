@@ -1,4 +1,4 @@
-class Step < AccountScopedRecord
+class Step < ApplicationRecord
   belongs_to :account, default: -> { Current.account }
   belongs_to :card, touch: true
 

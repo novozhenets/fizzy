@@ -21,18 +21,25 @@ class Comment::SearchableTest < ActiveSupport::TestCase
 
   test "comment search" do
     table_name = Searchable.search_index_table_name(@account.id)
+    uuid_type = ActiveRecord::Type.lookup(:uuid, adapter: :trilogy)
 
     # Comment is indexed on create
     comment = @card.comments.create!(body: "searchable comment text", creator: @user)
     result = ActiveRecord::Base.connection.execute(
-      "SELECT COUNT(*) FROM #{table_name} WHERE searchable_type = 'Comment' AND searchable_id = '#{comment.id}'"
+      ActiveRecord::Base.sanitize_sql([
+        "SELECT COUNT(*) FROM #{table_name} WHERE searchable_type = 'Comment' AND searchable_id = ?",
+        uuid_type.serialize(comment.id)
+      ])
     ).first[0]
     assert_equal 1, result
 
     # Comment is updated in index
     comment.update!(body: "updated text")
     content = ActiveRecord::Base.connection.execute(
-      "SELECT content FROM #{table_name} WHERE searchable_type = 'Comment' AND searchable_id = '#{comment.id}'"
+      ActiveRecord::Base.sanitize_sql([
+        "SELECT content FROM #{table_name} WHERE searchable_type = 'Comment' AND searchable_id = ?",
+        uuid_type.serialize(comment.id)
+      ])
     ).first[0]
     assert_match /updat/, content
 
@@ -40,7 +47,10 @@ class Comment::SearchableTest < ActiveSupport::TestCase
     comment_id = comment.id
     comment.destroy
     result = ActiveRecord::Base.connection.execute(
-      "SELECT COUNT(*) FROM #{table_name} WHERE searchable_type = 'Comment' AND searchable_id = '#{comment_id}'"
+      ActiveRecord::Base.sanitize_sql([
+        "SELECT COUNT(*) FROM #{table_name} WHERE searchable_type = 'Comment' AND searchable_id = ?",
+        uuid_type.serialize(comment_id)
+      ])
     ).first[0]
     assert_equal 0, result
 
@@ -55,9 +65,13 @@ class Comment::SearchableTest < ActiveSupport::TestCase
     # Comment stores parent card_id and board_id
     new_comment = @card.comments.create!(body: "test comment", creator: @user)
     row = ActiveRecord::Base.connection.execute(
-      "SELECT card_id, board_id FROM #{table_name} WHERE searchable_type = 'Comment' AND searchable_id = '#{new_comment.id}'"
+      ActiveRecord::Base.sanitize_sql([
+        "SELECT card_id, board_id FROM #{table_name} WHERE searchable_type = 'Comment' AND searchable_id = ?",
+        uuid_type.serialize(new_comment.id)
+      ])
     ).first
-    assert_equal @card.id, row[0]
-    assert_equal @board.id, row[1]
+    # Deserialize binary UUIDs from result
+    assert_equal @card.id, uuid_type.deserialize(row[0])
+    assert_equal @board.id, uuid_type.deserialize(row[1])
   end
 end

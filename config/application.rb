@@ -30,5 +30,10 @@ module Fizzy
     # include the tenant in query logs
     config.active_record.query_log_tags_enabled = true
     config.active_record.query_log_tags = [ :tenant ]
+
+    # Use UUID primary keys for all new tables
+    config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+    end
   end
 end

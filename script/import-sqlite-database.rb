@@ -101,7 +101,7 @@ class Import
     end
 
     def generate_uuid
-      UuidPrimaryKey.generate
+      ActiveRecord::Type::Uuid.generate
     end
 
     def setup_account

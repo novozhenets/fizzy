@@ -17,9 +17,12 @@ module ActiveRecord
       def serialize(value)
         return unless value
 
-        hex = value.to_s.to_i(36).to_s(16).rjust(32, "0")
-        binary = hex.scan(/../).map(&:hex).pack("C*")
+        binary = hex(value).scan(/../).map(&:hex).pack("C*")
         super(binary)
+      end
+
+      def hex(value)
+        value.to_s.to_i(36).to_s(16).rjust(32, "0")
       end
 
       def deserialize(value)

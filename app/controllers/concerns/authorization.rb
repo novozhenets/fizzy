@@ -22,7 +22,7 @@ module Authorization
     end
 
     def ensure_staff
-      head :forbidden unless Current.user.staff?
+      head :forbidden unless Current.identity.staff?
     end
 
     def ensure_can_access_account

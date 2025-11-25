@@ -27,18 +27,19 @@
 
     container-type: inline-size;
     display: grid;
-    gap: var(--column-gap);
     grid-template-columns: 1fr var(--column-width-expanded) 1fr;
     grid-template-rows: 1fr;
     inline-size: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     position: relative;
+    scroll-snap-type: inline mandatory;
 
     @media (min-width: 640px) {
       --column-gap: 8px;
       --column-width-expanded: 450px;
 
+      gap: var(--column-gap);
       margin-inline: auto;
       max-inline-size: var(--main-width);
     }
@@ -57,7 +58,10 @@
   .card-columns__right {
     align-items: stretch;
     display: flex;
-    gap: var(--column-gap);
+
+    @media (min-width: 640px) {
+      gap: var(--column-gap);
+    }
   }
 
   .card-columns__left {
@@ -85,6 +89,10 @@
     outline: none;
     overflow: auto;
     position: relative;
+
+    @media (max-width: 639px) {
+      scroll-snap-align: center;
+    }
 
     @media (min-width: 640px) {
       &.is-collapsed {
@@ -141,12 +149,17 @@
     border-radius: calc(var(--column-width-collapsed) / 2);
     display: flex;
     flex-direction: column;
+    padding-inline: var(--column-gap);
     translate: 0;
     transition: translate var(--column-transition-duration) var(--ease-out-overshoot-subtle);
 
     @media (min-width: 640px) {
       .cards:not(.is-collapsed) & {
         padding-inline: var(--column-padding-expanded);
+      }
+
+      .is-collapsed & {
+        padding-inline: 0;
       }
 
       .is-collapsed:not(.cards--considering) & {
@@ -208,6 +221,7 @@
 
   .cards__new-column {
     margin-block-start: var(--column-width-collapsed);
+    scroll-snap-align: center;
   }
 
   /* Cards grid; used when filtering
@@ -588,7 +602,6 @@
 
     @media (max-width: 639px) {
       .cards__list {
-        background: gold;
         overflow-y: auto;
       }
     }

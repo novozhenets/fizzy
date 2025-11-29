@@ -38,6 +38,13 @@ module Fizzy
         end
       end
 
+      # Load test mocks automatically in test environment
+      initializer "fizzy_saas.test_mocks", after: :load_config_initializers do
+        if Rails.env.test?
+          require "fizzy/saas/testing"
+        end
+      end
+
       initializer "fizzy_saas.sentry" do
         if !Rails.env.local? && ENV["SKIP_TELEMETRY"].blank?
           Sentry.init do |config|

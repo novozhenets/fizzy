@@ -1,1 +1,0 @@
-require "fizzy/saas/testing"

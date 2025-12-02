@@ -2,7 +2,7 @@
   /* Column container
   /* ------------------------------------------------------------------------ */
 
-  #scroll-container:has(.card-columns),
+  #global-container:has(.card-columns),
   #main:has(.card-columns) {
     display: grid;
     grid-template-rows: auto 1fr;

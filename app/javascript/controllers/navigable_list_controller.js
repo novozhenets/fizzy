@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import { nextFrame } from "helpers/timing_helpers"
 
 export default class extends Controller {
-  static targets = [ "item", "input" ]
+  static targets = [ "item", "input", "pausingDialog" ]
   static values = {
     reverseOrder: { type: Boolean, default: false },
     selectionAttribute: { type: String, default: "aria-selected" },
@@ -224,7 +224,7 @@ export default class extends Controller {
   }
 
   get #hasOpenDialog() {
-    return this.element.querySelector("dialog[data-navigable-list-pauses-navigation][open]") !== null
+    return this.pausingDialogTargets.some(dialog => dialog.open)
   }
 
   #keyHandlers = {

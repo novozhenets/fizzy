@@ -3,7 +3,7 @@
     <%= icon_tag "menu-dots-horizontal", class: "translucent" %>
     <span class="for-screen-reader">Column options</span>
   </button>
-  <dialog class="popup panel flex-column gap fill-white shadow txt-small margin-block-double" data-dialog-target="dialog" data-navigable-list-pauses-navigation>
+  <dialog class="popup panel flex-column gap fill-white shadow txt-small margin-block-double" data-dialog-target="dialog" data-navigable-list-target="pausingDialog">
     <ul class="popup__list">
       <li class="popup__item">
         <button class="popup__btn btn" data-action="click->clicker#click">
@@ -47,7 +47,7 @@
 
   <div data-controller="dialog" data-action="keydown.esc->dialog#close click@document->dialog#closeOnClickOutside">
     <button id="<%= dom_id(column, :manage_menu) %>" class="popup__btn btn" data-action="click->dialog#open:stop" data-clicker-target="clickable" hidden aria-hidden>Save changes</button>
-    <dialog class="popup panel flex-column gap-half fill-white shadow txt-small margin-block-double" data-dialog-target="dialog" data-action="turbo:before-morph-attribute->dialog#preventCloseOnMorphing" data-navigable-list-pauses-navigation>
+    <dialog class="popup panel flex-column gap-half fill-white shadow txt-small margin-block-double" data-dialog-target="dialog" data-action="turbo:before-morph-attribute->dialog#preventCloseOnMorphing" data-navigable-list-target="pausingDialog">
       <%= render "boards/show/menu/column_form", board: column.board, column: column, label: "Save changes" %>
     </dialog>
   </div>

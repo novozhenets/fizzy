@@ -482,7 +482,60 @@ Returns a specific card by its number.
 
 __Response:__
 
-Same as the card object in the list response.
+```json
+{
+  "id": "03f5vaeq985jlvwv3arl4srq2",
+  "number": 1,
+  "title": "First!",
+  "status": "published",
+  "description": "Hello, World!",
+  "description_html": "<div class=\"action-text-content\"><p>Hello, World!</p></div>",
+  "image_url": null,
+  "tags": ["programming"],
+  "golden": false,
+  "last_active_at": "2025-12-05T19:38:48.553Z",
+  "created_at": "2025-12-05T19:38:48.540Z",
+  "url": "http://fizzy.localhost:3006/897362094/cards/4",
+  "board": {
+    "id": "03f5v9zkft4hj9qq0lsn9ohcm",
+    "name": "Fizzy",
+    "all_access": true,
+    "created_at": "2025-12-05T19:36:35.534Z",
+    "url": "http://fizzy.localhost:3006/897362094/boards/03f5v9zkft4hj9qq0lsn9ohcm",
+    "creator": {
+      "id": "03f5v9zjw7pz8717a4no1h8a7",
+      "name": "David Heinemeier Hansson",
+      "role": "owner",
+      "active": true,
+      "email_address": "david@example.com",
+      "created_at": "2025-12-05T19:36:35.401Z",
+      "url": "http://fizzy.localhost:3006/897362094/users/03f5v9zjw7pz8717a4no1h8a7"
+    }
+  },
+  "creator": {
+    "id": "03f5v9zjw7pz8717a4no1h8a7",
+    "name": "David Heinemeier Hansson",
+    "role": "owner",
+    "active": true,
+    "email_address": "david@example.com",
+    "created_at": "2025-12-05T19:36:35.401Z",
+    "url": "http://fizzy.localhost:3006/897362094/users/03f5v9zjw7pz8717a4no1h8a7"
+  },
+  "comments_url": "http://fizzy.localhost:3006/897362094/cards/4/comments",
+  "steps": [
+    {
+      "id": "03f8huu0sog76g3s975963b5e",
+      "content": "This is the first step",
+      "completed": false
+    },
+    {
+      "id": "03f8huu0sog76g3s975969734",
+      "content": "This is the second step",
+      "completed": false
+    }
+  ]
+}
+```
 
 ### `POST /:account_slug/boards/:board_id/cards`
 

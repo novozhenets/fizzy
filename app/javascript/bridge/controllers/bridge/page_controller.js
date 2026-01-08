@@ -1,5 +1,4 @@
 import { BridgeComponent } from "@hotwired/hotwire-native-bridge"
-import { BridgeElement } from "@hotwired/hotwire-native-bridge"
 import { viewport } from "bridge/helpers/viewport"
 import { nextFrame } from "helpers/timing_helpers"
 
@@ -24,9 +23,6 @@ export default class extends BridgeComponent {
 
   receive(message) {
     switch (message.event) {
-    case "change":
-      this.updateHeaderVisibility(message.data)
-      break
     case "set-text-size":
       this.setTextSize(message.data)
       break
@@ -37,22 +33,9 @@ export default class extends BridgeComponent {
     document.documentElement.dataset.textSize = data.textSize
   }
 
-  updateHeaderVisibility(data) {
-    if (!this.hasHeaderTarget) return
-
-    const headerElement = new BridgeElement(this.headerTarget)
-
-    if (data.displayOnPlatform) {
-      headerElement?.showOnPlatform()
-    } else {
-      headerElement?.hideOnPlatform()
-    }
-  }
-
   // Bridge
 
   notifyBridgeOfPageChange() {
-    let headerElement = null
     const data = {
       title: this.title,
       url: window.location.href
@@ -60,9 +43,7 @@ export default class extends BridgeComponent {
 
     if (this.hasHeaderTarget) {
       // Assume header visible by default until we get IntersectionObserver update
-      headerElement = new BridgeElement(this.headerTarget)
       data.elementVisible = true
-      data.displayOnPlatform = headerElement.isDisplayedOnPlatform()
     }
 
     this.send("change", data, message => this.receive(message))

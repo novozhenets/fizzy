@@ -2,7 +2,7 @@
 
 @layer components {
   .blank-slate {
-    border-radius: 1ch;
+    border-radius: 0.5ch;
     border: 2px dashed var(--color-ink-lighter);
     color: var(--color-ink-dark);
     font-weight: 500;

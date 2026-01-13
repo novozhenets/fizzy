@@ -292,7 +292,7 @@
 
     /* Overlap the card BG by half the button height */
     &:has(.btn) {
-      translate: 0 -50%;
+      translate: 0 calc(-1 * var(--half-btn-height));
     }
 
     form {

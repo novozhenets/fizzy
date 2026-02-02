@@ -1,4 +1,4 @@
-# SKILLs for AI Agents
+# SKILLS for AI Agents
 
 This document provides AI agents with specific skills and patterns for working effectively with the Fizzy codebase. It complements [AGENTS.md](AGENTS.md) (architecture overview) and [STYLE.md](STYLE.md) (code style guidelines).
 

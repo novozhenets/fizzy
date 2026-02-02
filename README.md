@@ -23,6 +23,8 @@ Please see our [Development guide](docs/development.md) for how to get Fizzy set
 
 We welcome contributions! Please read our [style guide](STYLE.md) before submitting code.
 
+For AI agents: See [AGENTS.md](AGENTS.md) for architecture overview and [SKILLS.md](SKILLS.md) for development patterns.
+
 
 ## License
 

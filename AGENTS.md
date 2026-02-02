@@ -149,3 +149,7 @@ Use Chrome MCP tools to interact with the running dev app for UI testing and deb
 ## Coding style
 
 @STYLE.md
+
+## Development patterns
+
+For practical, pattern-based guidance on developing features in Fizzy, see @SKILLS.md
